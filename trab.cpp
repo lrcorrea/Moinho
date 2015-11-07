@@ -3,7 +3,8 @@
 
 #define l 10
 #define c 3
-void imprime(int mat[][c]){
+
+void imprime(int mat[][c]){//funcao com o desenho, ainda vou pensar com como vou fazer as linhas
 	
 	for(int i=0; i<l; i++){
 		for(int j=0; j<c; j++){
@@ -37,23 +38,24 @@ void imprime(int mat[][c]){
 			}
 			
 			
-		
+			//espaçamento
 			if(i == 0 || i == 8){
-				printf("%d             ", mat[i][j]);//12 spaces > na linha 1 e 7
+				printf("%d             ", mat[i][j]);//primeira e ultima linha
 			}
 			
 			if(i == 1 || i == 7){
-				printf("      %d ", mat[i][j]);//6 spaces < na linha 1 e 6
+				printf("      %d ", mat[i][j]);//segunda e penultima
 			}
 			
 			if(i == 2 || i == 6){
 				if(j == 0){
-					printf("         %d    ", mat[i][j]);//8 spaces < na linha 2 e 5
+					printf("         %d    ", mat[i][j]);//terceira e antepenultima
 				}else{
-					printf("%d    ", mat[i][j]);//3 spaces >
+					printf("%d    ", mat[i][j]);//quarta
 				}
 			}
 			if(i == 3 || i == 4){
+				//espaçamento da linha que tem 6 colunas
 				if(j == 0 && i == 3){
 					printf("%d     ", mat[i][j]);
 				}
@@ -80,6 +82,7 @@ void imprime(int mat[][c]){
 		
 		
 		if(i != 3 && i != 4){
+			//aqui faço uma linha na direta pra ficar bonitinho, mas provisorio
 			if(i<8){
 				printf("\n |\n");
 			}
@@ -90,19 +93,18 @@ void imprime(int mat[][c]){
 		
 	}
 	
-	
-	
 }
 
 int main(){
 	int mat[l][c];
 	
-	for(int i=0; i<l; i++){
+	for(int i=0; i<l; i++){//laço pra atribuir 0 na matriz
 		for(int j=0; j<c; j++){
 			mat[i][j]=0;
 		}
 	}
-	imprime(mat);
+	
+	imprime(mat);//chama funcao que vai imprimir desenho
 	
 	system("pause");
 }
