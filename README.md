@@ -1,9 +1,7 @@
 Trabalho de Programação
 
-Abrir com Dev C++, compilar e rodar.
+Baixar o arquivo trab.cpp, abrir com Dev C++, compilar e rodar.
 
-Imagem https://goo.gl/F4kbC6
-
-O desenho está funcionando XD
+Imagem do desenho https://goo.gl/F4kbC6
 
 by: Lucas e Douglas
