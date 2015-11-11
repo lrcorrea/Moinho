@@ -37,7 +37,7 @@ void imprime(char mat[][c]){//funcao com o desenho, ainda vou pensar com como vo
 			}
 			
 			
-			//espaÃ§amento
+			//espaçamento
 			if(i == 0 || i == 8){
 				printf("%c             ", mat[i][j]);//primeira e ultima linha
 			}
@@ -54,7 +54,7 @@ void imprime(char mat[][c]){//funcao com o desenho, ainda vou pensar com como vo
 				}
 			}
 			if(i == 3 || i == 4){
-				//espaÃ§amento da linha que tem 6 colunas
+				//espaçamento da linha que tem 6 colunas
 				if(j == 0 && i == 3){
 					printf("%c     ", mat[i][j]);
 				}
@@ -76,7 +76,7 @@ void imprime(char mat[][c]){//funcao com o desenho, ainda vou pensar com como vo
 			}		
 		}
 		if(i != 3 && i != 4){
-			//aqui faÃ§o uma linha na direta pra ficar bonitinho, mas provisorio
+			//aqui faço uma linha na direta pra ficar bonitinho, mas provisorio
 			if(i<8){
 				printf("\n |\n");
 			}
@@ -87,14 +87,11 @@ void imprime(char mat[][c]){//funcao com o desenho, ainda vou pensar com como vo
 	}
 }
 
-<<<<<<< HEAD
 //função que verifica se o espaço é vago
-=======
-//funÃ§Ã£o que verifica se o espaÃ§o Ã© vago
->>>>>>> 2d8472dd3226665ddd954048a28a25dceef403ac
 bool attrMat(char mat[][c], int linha, char coluna, int cont, int qtd){
 	bool troca=false, muda=false;
 	
+	//converto a linha e coluna lida pra a equivalência da matriz
 	if(((linha==1) || (linha==7)) && (coluna==1)){//linha A e G
 		coluna=1;
 		troca=true;
@@ -199,7 +196,7 @@ int main(){
 	int qtdInit=0, coluna, cont=0, contAux=0;
 	bool fim=false, verDisp=false;
 	
-	for(int i=0; i<l; i++){//laÃ§o pra atribuir 0 na matriz
+	for(int i=0; i<l; i++){//laço pra atribuir 0 na matriz
 		for(int j=0; j<c; j++){
 			mat[i][j]='0';
 		}
@@ -208,19 +205,11 @@ int main(){
 	imprime(mat);//chama funcao que vai imprimir desenho
 	
 
-<<<<<<< HEAD
 	while(qtdInit<9){//laço para jogo até usar todas peças
 		cont++;
 		do{//laço pra verificar validade de jogada
 			
 			//aqui volta do goto quando jogada é invalida; desnessesauro
-=======
-	while(qtdInit<9){//laÃ§o para jogo atÃ© usar todas peÃ§as
-		cont++;
-		do{//laÃ§o pra verificar validade de jogada
-			
-			//aqui volta do goto quando jogada Ã© invalida; desnessesauro
->>>>>>> 2d8472dd3226665ddd954048a28a25dceef403ac
 			volta:
 				
 			if(cont%2!=0){//player x, quando for impar
@@ -252,11 +241,7 @@ int main(){
 				goto volta;// goto volta na linha indicada pela var volta
 			}
 		
-<<<<<<< HEAD
 			//apenas cuidando do comportamento das var cont que é o player atual e o qtdInit até acabar as 9 peças
-=======
-			//apenas cuidando do comportamento das var cont que Ã© o player atual e o qtdInit atÃ© acabar as 9 peÃ§as
->>>>>>> 2d8472dd3226665ddd954048a28a25dceef403ac
 			printf("cont: %d / qtdInt: %d\n", cont, qtdInit);
 				
 		}while((coordenada[0]<65) && (coordenada[0]>71));		
