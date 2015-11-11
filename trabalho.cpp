@@ -91,6 +91,7 @@ void imprime(char mat[][c]){//funcao com o desenho, ainda vou pensar com como vo
 bool attrMat(char mat[][c], int linha, char coluna, int cont, int qtd){
 	bool troca=false, muda=false;
 	
+	//converto a linha e coluna lida pra a equivalência da matriz
 	if(((linha==1) || (linha==7)) && (coluna==1)){//linha A e G
 		coluna=1;
 		troca=true;
