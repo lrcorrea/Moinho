@@ -87,98 +87,104 @@ void imprime(char mat[][c]){//funcao com o desenho, ainda vou pensar com como vo
 	}
 }
 
+//função para fazer as equivalencias de linha e coluna; retorna true se houve equiv
+bool tranLinCol(char linha[1], int coluna[1]){
+	bool troca=false;
+	
+	if(((linha[0]==1) || (linha[0]==7)) && (coluna[0]==1)){//linha A e G
+		coluna[0]=1;
+		if(linha[0]==7){
+			linha[0]+=2;
+		}
+		return true;
+	}else if(((linha[0]==1) || (linha[0]==7)) && (coluna[0]==4)){
+		coluna[0]=2;
+		if(linha[0]==7){
+			linha[0]+=2;
+		}
+		return true;
+	}else if(((linha[0]==1) || (linha[0]==7)) && (coluna[0]==7)){
+		coluna[0]=3;
+		if(linha[0]==7){
+			linha[0]+=2;
+		}
+		return true;
+	}
+	else if(((linha[0]==2) || (linha[0]==6)) && (coluna[0]==2)){//linha B e F
+		coluna[0]=1;
+		if(linha[0]==6){
+			linha[0]+=2;
+		}
+		return true;
+	}else if(((linha[0]==2) || (linha[0]==6)) && (coluna[0]==4)){
+		coluna[0]=2;
+		if(linha[0]==6){
+			linha[0]+=2;
+		}
+		return true;
+	}else if(((linha[0]==2) || (linha[0]==6)) && (coluna[0]==6)){
+		coluna[0]=3;
+		if(linha[0]==6){
+			linha[0]+=2;
+		}
+		return true;
+	}
+	else if(((linha[0]==3) || (linha[0]==5)) && (coluna[0]==3)){//linha C e E
+		coluna[0]=1;
+		if(linha[0]==5){
+			linha[0]+=2;
+		}
+		return true;
+	}else if(((linha[0]==3) || (linha[0]==5)) && (coluna[0]==4)){
+		coluna[0]=2;
+		if(linha[0]==5){
+			linha[0]+=2;
+		}
+		return true;
+	}else if(((linha[0]==3) || (linha[0]==5)) && (coluna[0]==5)){
+		coluna[0]=3;
+		if(linha[0]==5){
+			linha[0]+=2;
+		}
+		return true;
+	}
+	else if((linha[0]==4) && ((coluna[0]==1) || (coluna[0]==5))){//linha D
+		if(coluna[0]>4){
+			linha[0]=5;
+		}
+		coluna[0]=1;
+		return true;
+	}else if((linha[0]==4) && ((coluna[0]==2) || (coluna[0]==6))){
+		if(coluna[0]>4){
+			linha[0]=5;
+		}
+		coluna[0]=2;
+		return true;
+	}else if((linha[0]==4) && ((coluna[0]==3) || (coluna[0]==7))){
+		if(coluna[0]>4){
+			linha[0]=5;
+		}
+		coluna[0]=3;
+		return true;
+	}else{
+		return false;
+	}
+}
+
 //função que verifica se o espaço é vago
-bool attrMat(char mat[][c], int linha, char coluna, int cont, int qtd){
+bool attrMat(char mat[][c], char linha[1], int coluna[1], int cont, int qtd){
 	bool troca=false, muda=false;
 	
-	//converto a linha e coluna lida pra a equivalência da matriz
-	if(((linha==1) || (linha==7)) && (coluna==1)){//linha A e G
-		coluna=1;
-		troca=true;
-		if(linha==7){
-			linha+=2;
-		}
-	}else if(((linha==1) || (linha==7)) && (coluna==4)){
-		coluna=2;
-		troca=true;
-		if(linha==7){
-			linha+=2;
-		}
-	}else if(((linha==1) || (linha==7)) && (coluna==7)){
-		coluna=3;
-		troca=true;
-		if(linha==7){
-			linha+=2;
-		}
-	}
-	else if(((linha==2) || (linha==6)) && (coluna==2)){//linha B e F
-		coluna=1;
-		troca=true;
-		if(linha==6){
-			linha+=2;
-		}
-	}else if(((linha==2) || (linha==6)) && (coluna==4)){
-		coluna=2;
-		troca=true;
-		if(linha==6){
-			linha+=2;
-		}
-	}else if(((linha==2) || (linha==6)) && (coluna==6)){
-		coluna=3;
-		troca=true;
-		if(linha==6){
-			linha+=2;
-		}
-	}
-	else if(((linha==3) || (linha==5)) && (coluna==3)){//linha C e E
-		coluna=1;
-		troca=true;
-		if(linha==5){
-			linha+=2;
-		}
-	}else if(((linha==3) || (linha==5)) && (coluna==4)){
-		coluna=2;
-		troca=true;
-		if(linha==5){
-			linha+=2;
-		}
-	}else if(((linha==3) || (linha==5)) && (coluna==5)){
-		coluna=3;
-		troca=true;
-		if(linha==5){
-			linha+=2;
-		}
-	}
-	else if((linha==4) && ((coluna==1) || (coluna==5))){//linha D
-		if(coluna>4){
-			linha=5;
-		}
-		coluna=1;
-		troca=true;
-	}else if((linha==4) && ((coluna==2) || (coluna==6))){
-		if(coluna>4){
-			linha=5;
-		}
-		coluna=2;
-		troca=true;
-	}else if((linha==4) && ((coluna==3) || (coluna==7))){
-		if(coluna>4){
-			linha=5;
-		}
-		coluna=3;
-		troca=true;
-	}else{
-		troca=false;
-	}
+	troca = tranLinCol(linha, coluna);
 	
-	if((mat[linha-1][coluna-1]!='0') || (troca==false)){
+	if((mat[linha[0]-1][coluna[0]-1]!='0') || (troca==false)){
 		return false;
 	}else{
 		
 		if((cont%2!=0) && (troca==true)){
-			mat[linha-1][coluna-1] = 88;//88 X
+			mat[linha[0]-1][coluna[0]-1] = 88;//88 X
 		}else if((cont%2==0) && (troca==true)){
-			mat[linha-1][coluna-1] = 89;//79 Y
+			mat[linha[0]-1][coluna[0]-1] = 89;//79 Y
 		}
 		
 		if(troca==true){
@@ -187,14 +193,20 @@ bool attrMat(char mat[][c], int linha, char coluna, int cont, int qtd){
 		return true;
 	}
 }
- 
+
+//função para verificar se houve uma trinca
+bool verificaTrinca(char mat[][c], char linha[1], int coluna[1]){
+	bool trinca=false;
+	
+	return trinca;
+} 
 
 int main(){
 	char mat[l][c];
 	char nome1[10]="Lucas", nome2[10]="Lusca";
-	char coordenada[2], linha;
-	int qtdInit=0, coluna, cont=0, contAux=0;
-	bool fim=false, verDisp=false;
+	char coordenada[2], linha[1];
+	int qtdInit=0, coluna[1], cont=0, contAux=0;
+	bool fim=false, verDisp=false, temTrinca=false;
 	
 	for(int i=0; i<l; i++){//laço pra atribuir 0 na matriz
 		for(int j=0; j<c; j++){
@@ -219,18 +231,19 @@ int main(){
 			}
 			gets(coordenada);
 				
-			coluna = (coordenada[1]-48);//converto em um numero de 1 a 7
-			linha = coordenada[0];
+			coluna[0] = (coordenada[1]-48);//converto em um numero de 1 a 7
+			linha[0] = coordenada[0];
 					
-			if(linha - 32 >= 65){
-				linha = linha-32;//se for minuscula transformo em maiscula
+			if(linha[0] - 32 >= 65){
+				linha[0] = linha[0]-32;//se for minuscula transformo em maiscula
 			}
-			linha -= 64;//transformo a letra em um numero equivalente a=1, b=2...
-
+			linha[0] -= 64;//transformo a letra em um numero equivalente a=1, b=2...
+			
 			verDisp = attrMat(mat, linha, coluna, cont, qtdInit);
 			
-			if(((linha>=1) && (linha<=7)) && ((coluna>=1) && (coluna<=7)) && (verDisp==true)){
+			if(((linha[0]>=1) && (linha[0]<=7)) && ((coluna[0]>=1) && (coluna[0]<=7)) && (verDisp==true)){
 				//so faz cont quando o player Y for jogar
+				temTrinca = verificaTrinca(mat, linha, coluna);
 				if(cont%2==0){
 					qtdInit+=1;
 				}
