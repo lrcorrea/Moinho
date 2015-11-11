@@ -39,39 +39,39 @@ void imprime(char mat[][c]){//funcao com o desenho, ainda vou pensar com como vo
 			
 			//espaçamento
 			if(i == 0 || i == 8){
-				printf("%d             ", mat[i][j]);//primeira e ultima linha
+				printf("%c             ", mat[i][j]);//primeira e ultima linha
 			}
 			
 			if(i == 1 || i == 7){
-				printf("      %d ", mat[i][j]);//segunda e penultima
+				printf("      %c ", mat[i][j]);//segunda e penultima
 			}
 			
 			if(i == 2 || i == 6){
 				if(j == 0){
-					printf("         %d    ", mat[i][j]);//terceira e antepenultima
+					printf("         %c    ", mat[i][j]);//terceira e antepenultima
 				}else{
-					printf("%d    ", mat[i][j]);//quarta
+					printf("%c    ", mat[i][j]);//quarta
 				}
 			}
 			if(i == 3 || i == 4){
 				//espaçamento da linha que tem 6 colunas
 				if(j == 0 && i == 3){
-					printf("%d     ", mat[i][j]);
+					printf("%c     ", mat[i][j]);
 				}
 				else if(j == 1 && i == 3){
-					printf("%d  ", mat[i][j]);
+					printf("%c  ", mat[i][j]);
 				}
 				else if(j == 2 && i == 3){
-					printf("%d         ", mat[i][j]);
+					printf("%c         ", mat[i][j]);
 				}
 				else if(j == 0 && i == 4){
-					printf("%d  ", mat[i][j]);
+					printf("%c  ", mat[i][j]);
 				}
 				else if(j == 1 && i == 4){
-					printf("%d     ", mat[i][j]);
+					printf("%c     ", mat[i][j]);
 				}
 				else if(j == 2 && i == 4){
-					printf("%d", mat[i][j]);
+					printf("%c", mat[i][j]);
 				}
 			}		
 		}
@@ -87,73 +87,163 @@ void imprime(char mat[][c]){//funcao com o desenho, ainda vou pensar com como vo
 	}
 }
 
-//função que atribui a pos de X; retorna qtd++, verifica a validade da jogada
-int attrMat(int linha,char coluna, int qtd, char mat[][c]){
-	printf("linha: %d / coluna: %d\n", linha, coluna);
-	return qtd++;
+//função que verifica se o espaço é vago
+bool attrMat(char mat[][c], int linha, char coluna, int cont, int qtd){
+	bool troca=false, muda=false;
+	
+	if(((linha==1) || (linha==7)) && (coluna==1)){//linha A e G
+		coluna=1;
+		troca=true;
+		if(linha==7){
+			linha+=2;
+		}
+	}else if(((linha==1) || (linha==7)) && (coluna==4)){
+		coluna=2;
+		troca=true;
+		if(linha==7){
+			linha+=2;
+		}
+	}else if(((linha==1) || (linha==7)) && (coluna==7)){
+		coluna=3;
+		troca=true;
+		if(linha==7){
+			linha+=2;
+		}
+	}
+	else if(((linha==2) || (linha==6)) && (coluna==2)){//linha B e F
+		coluna=1;
+		troca=true;
+		if(linha==6){
+			linha+=2;
+		}
+	}else if(((linha==2) || (linha==6)) && (coluna==4)){
+		coluna=2;
+		troca=true;
+		if(linha==6){
+			linha+=2;
+		}
+	}else if(((linha==2) || (linha==6)) && (coluna==6)){
+		coluna=3;
+		troca=true;
+		if(linha==6){
+			linha+=2;
+		}
+	}
+	else if(((linha==3) || (linha==5)) && (coluna==3)){//linha C e E
+		coluna=1;
+		troca=true;
+		if(linha==5){
+			linha+=2;
+		}
+	}else if(((linha==3) || (linha==5)) && (coluna==4)){
+		coluna=2;
+		troca=true;
+		if(linha==5){
+			linha+=2;
+		}
+	}else if(((linha==3) || (linha==5)) && (coluna==5)){
+		coluna=3;
+		troca=true;
+		if(linha==5){
+			linha+=2;
+		}
+	}
+	else if((linha==4) && ((coluna==1) || (coluna==5))){//linha D
+		if(coluna>4){
+			linha=5;
+		}
+		coluna=1;
+		troca=true;
+	}else if((linha==4) && ((coluna==2) || (coluna==6))){
+		if(coluna>4){
+			linha=5;
+		}
+		coluna=2;
+		troca=true;
+	}else if((linha==4) && ((coluna==3) || (coluna==7))){
+		if(coluna>4){
+			linha=5;
+		}
+		coluna=3;
+		troca=true;
+	}else{
+		troca=false;
+	}
+	
+	if((mat[linha-1][coluna-1]!='0') || (troca==false)){
+		return false;
+	}else{
+		
+		if((cont%2!=0) && (troca==true)){
+			mat[linha-1][coluna-1] = 88;//88 X
+		}else if((cont%2==0) && (troca==true)){
+			mat[linha-1][coluna-1] = 89;//79 Y
+		}
+		
+		if(troca==true){
+			imprime(mat);
+		}
+		return true;
+	}
 }
-
-
+ 
 
 int main(){
 	char mat[l][c];
 	char nome1[10]="Lucas", nome2[10]="Lusca";
 	char coordenada[2], linha;
-	int qtdInit=0, coluna, cont=0;
-	bool fim=false;
+	int qtdInit=0, coluna, cont=0, contAux=0;
+	bool fim=false, verDisp=false;
 	
 	for(int i=0; i<l; i++){//laço pra atribuir 0 na matriz
 		for(int j=0; j<c; j++){
-			mat[i][j]=0;
+			mat[i][j]='0';
 		}
 	}
 	
 	imprime(mat);//chama funcao que vai imprimir desenho
 	
-	//le nome dos jogadores
-	/*printf("Infrome o nome do player X: ");
-	gets(nome1);
-	printf("Infrome o nome do player O: ");
-	gets(nome2);*/
-	
-	while(qtdInit<=9){//laço para jogo até usar todas peças
-		cont++;
-		if(cont%2!=0){//player x, quando for impar
-			do{//laço pra verificar validade de jogada do X
-				printf("%s, Informe uma posicao para X: ", nome1);
-				volta://aqui volta do goto quando jogada é invalida; desnessesauro
-				gets(coordenada);
-				
-				coluna = (coordenada[1]-48);//converto em um numero de 1 a 7
-				linha = coordenada[0];
-					
-				if(linha - 32 >= 65){
-					linha = linha-32;//se for minuscula transformo em maiscula
-				}
-				linha -= 64;//transformo a letra em um numero equivalente a=1, b=2...
 
-				if((linha>=1) && (linha<=7) && (coluna>=1) && (coluna<=7)){
-					//chamo a funcao que verifica e atribui no lugar indicado, qtdInit é o num de peças que foram jogadas
-					qtdInit = attrMat(linha, coluna, qtdInit, mat);
-				}else{
-					printf("Tente novamente, exemplo A1\n");
-					goto volta;// goto volta na linha indicada pela var volta
-				}	
-			}while((coordenada[0]<65) && (coordenada[0]>71));		
-		}
-		//essa parte de baixo fica pra próxima que e o O, player2
-	/*	else if(cont%2==0){//playerY, quando for par
-			do{//laço pra verificar validade de jogada do O
-				printf("%s, Informe uma posicao para O: ", nome2);
-				gets(coordenada);
-				if((pos[0]<65) || (posX[0]>71) && (posX[1]<49) || (posX[1])>55){
-					printf("Tente novamente, exemplo A1\n");
-				}else{
-					qtdInit = attrMat(coordenada, qtdInit, mat);
-				}	
-			}while((posX[0]<65) && (posX[0]>71));
-		}*/
+	while(qtdInit<9){//laço para jogo até usar todas peças
+		cont++;
+		do{//laço pra verificar validade de jogada
+			
+			//aqui volta do goto quando jogada é invalida; desnessesauro
+			volta:
+				
+			if(cont%2!=0){//player x, quando for impar
+				printf("%s, Informe uma posicao para X: ", nome1);
+			}else if(cont%2==0){//player Y, quando par
+				printf("%s, Informe uma posicao para Y: ", nome2);
+			}
+			gets(coordenada);
+				
+			coluna = (coordenada[1]-48);//converto em um numero de 1 a 7
+			linha = coordenada[0];
+					
+			if(linha - 32 >= 65){
+				linha = linha-32;//se for minuscula transformo em maiscula
+			}
+			linha -= 64;//transformo a letra em um numero equivalente a=1, b=2...
+
+			verDisp = attrMat(mat, linha, coluna, cont, qtdInit);
+			
+			if(((linha>=1) && (linha<=7)) && ((coluna>=1) && (coluna<=7)) && (verDisp==true)){
+				//so faz cont quando o player Y for jogar
+				if(cont%2==0){
+					qtdInit+=1;
+				}
+			
+			}
+			else if(verDisp==false){
+				printf("Posicao invalida, tente novamente\n");
+				goto volta;// goto volta na linha indicada pela var volta
+			}
 		
+			//apenas cuidando do comportamento das var cont que é o player atual e o qtdInit até acabar as 9 peças
+			printf("cont: %d / qtdInt: %d\n", cont, qtdInit);
+				
+		}while((coordenada[0]<65) && (coordenada[0]>71));		
 	}
 	
 	
