@@ -246,9 +246,6 @@ int main(){
 		}while((coordenada[0]<65) && (coordenada[0]>71));		
 	}
 	
-	
-	
-	
-	
+
 	system("pause");
 }
