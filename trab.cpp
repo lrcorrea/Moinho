@@ -5,7 +5,8 @@
 #define l 10
 #define c 3
 
-void imprime(char mat[][c]){//funcao com o desenho, ainda vou pensar com como vou fazer as linhas
+//funcao com o desenho, ainda vou pensar com como vou fazer as linhas
+void imprime(char mat[][c]){
 	for(int i=0; i<l; i++){
 		for(int j=0; j<c; j++){
 			//numerando as linhas
@@ -198,6 +199,22 @@ bool attrMat(char mat[][c], char linha[1], int coluna[1], int cont, int qtd){
 bool verificaTrinca(char mat[][c], char linha[1], int coluna[1]){
 	bool trinca=false;
 	
+	linha[0]-=1;
+	coluna[0]-=1;
+	
+	printf("linha: %d / coluna: %d\n", linha[0], coluna[0]);
+	
+	if(linha[0] == 0){
+		
+		for(int i=0; i<lin; i++){
+			for(int j=0; j<col*2; j++){
+				if(j<=2){
+					
+				}
+			}
+		}
+	}
+	
 	return trinca;
 } 
 
@@ -255,7 +272,7 @@ int main(){
 			}
 		
 			//apenas cuidando do comportamento das var cont que é o player atual e o qtdInit até acabar as 9 peças
-			printf("cont: %d / qtdInt: %d\n", cont, qtdInit);
+			//printf("cont: %d / qtdInt: %d\n", cont, qtdInit);
 				
 		}while((coordenada[0]<65) && (coordenada[0]>71));		
 	}
